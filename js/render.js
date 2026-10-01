@@ -1,4 +1,5 @@
 import { formatarData,formatarMoeda } from "./utils.js";
+import { calcularTotais } from "../calculos.js";
 
 export function criarLinha(mov)
 {
@@ -28,4 +29,18 @@ export function criarLinha(mov)
 
 export function renderLista(container, movimentos) {
   container.replaceChildren(...movimentos.map(criarLinha));
+}
+
+export function renderResumo(totais)
+{
+
+  const saldo = document.getElementById("saldo");
+  const receitas = document.getElementById("receitas");
+  const despesas = document.getElementById("despesas");
+
+  saldo.textContent = formatarMoeda(totais.saldo);
+  receitas.textContent= formatarMoeda(totais.receitas);
+  despesas.textContent= formatarMoeda(totais.despesas);
+  
+
 }
