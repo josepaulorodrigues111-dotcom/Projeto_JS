@@ -1,4 +1,7 @@
 import { carregarDados } from "./api.js";
+import { renderLista } from "./render.js";
+
+const listaEl = document.getElementById("lista-movimentos");
 
 const dados = await carregarDados();
-console.table(dados);
+renderLista(listaEl, dados);
