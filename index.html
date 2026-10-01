@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carteira de Finanças Pessoais</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Carteira</h1>
+    </header>
+
+    <main>
+
+        
+        <section id="resumo">
+            <div class="cartao">
+                <p>Saldo total</p>
+                <span id="saldo">0,00 €</span>
+            </div>
+            <div class="cartao">
+                <p>Receitas</p>
+                <span id="receitas">0,00 €</span>
+            </div>
+            <div class="cartao">
+                <p>Despesas</p>
+                <span id="despesas">0,00 €</span>
+            </div>
+        </section>
+
+       
+        <div class="layout-principal">
+
+            
+            <section id="novo-movimento">
+                <h2>Novo movimento</h2>
+
+                <form id="form-movimento">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao" placeholder="Ex: Compras supermercado" required>
+
+                    <label for="valor">Valor (€)</label>
+                    <input type="number" id="valor" step="0.01" min="0" placeholder="0,00" required>
+
+                    <label for="tipo">Tipo</label>
+                    <select id="tipo">
+                        <option value="despesa">Despesa</option>
+                        <option value="receita">Receita</option>
+                    </select>
+
+                    <label for="categoria">Categoria</label>
+                    <select id="categoria">
+                        <option value="Alimentação">Alimentação</option>
+                        <option value="Habitação">Habitação</option>
+                        <option value="Transportes">Transportes</option>
+                        <option value="Lazer">Lazer</option>
+                        <option value="Saúde">Saúde</option>
+                        <option value="Trabalho">Trabalho</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+
+                    <label for="data">Data</label>
+                    <input type="date" id="data" required>
+
+                    <p id="erro-form" class="erro" hidden></p>
+
+                    <button type="submit" id="add-mov">+ Adicionar</button>
+                </form>
+            </section>
+
+            
+            <section id="movimentos">
+                <h2>Movimentos</h2>
+
+                <div id="filtros">
+                    <input type="search" id="pesquisa" placeholder="Pesquisar...">
+
+                    <select id="filtro-tipo">
+                        <option value="todos">Todos</option>
+                        <option value="receita">Receitas</option>
+                        <option value="despesa">Despesas</option>
+                    </select>
+
+                    <select id="filtro-categoria">
+                        <option value="">Categorias</option>
+                        <option value="Alimentação">Alimentação</option>
+                        <option value="Habitação">Habitação</option>
+                        <option value="Transportes">Transportes</option>
+                        <option value="Lazer">Lazer</option>
+                        <option value="Saúde">Saúde</option>
+                        <option value="Trabalho">Trabalho</option>
+                        <option value="Outros">Outros</option>
+                    </select>
+                </div>
+
+                <ul id="lista-movimentos">
+                    
+                </ul>
+            </section>
+        </div>
+
+            <section id="despesas-categoria">
+            <h2>Despesas por categoria</h2>
+            <ul id="lista-categorias"></ul>
+        
+        </section>
+
+    </main>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

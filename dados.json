@@ -1,0 +1,22 @@
+[
+  { "id": 1,  "descricao": "Salário",                  "valor": 1450.00, "tipo": "receita", "categoria": "Trabalho",    "data": "2026-07-01" },
+  { "id": 2,  "descricao": "Renda do apartamento",     "valor": 550.00,  "tipo": "despesa", "categoria": "Habitação",   "data": "2026-07-02" },
+  { "id": 3,  "descricao": "Supermercado Continente",  "valor": 86.40,   "tipo": "despesa", "categoria": "Alimentação", "data": "2026-07-05" },
+  { "id": 4,  "descricao": "Passe Navegante",          "valor": 40.00,   "tipo": "despesa", "categoria": "Transportes", "data": "2026-07-06" },
+  { "id": 5,  "descricao": "Cinema",                   "valor": 18.50,   "tipo": "despesa", "categoria": "Lazer",       "data": "2026-07-12" },
+  { "id": 6,  "descricao": "Farmácia",                 "valor": 23.90,   "tipo": "despesa", "categoria": "Saúde",       "data": "2026-07-18" },
+  { "id": 7,  "descricao": "Salário",                  "valor": 1450.00, "tipo": "receita", "categoria": "Trabalho",    "data": "2026-08-01" },
+  { "id": 8,  "descricao": "Renda do apartamento",     "valor": 550.00,  "tipo": "despesa", "categoria": "Habitação",   "data": "2026-08-02" },
+  { "id": 9,  "descricao": "Supermercado Pingo Doce",  "valor": 112.75,  "tipo": "despesa", "categoria": "Alimentação", "data": "2026-08-08" },
+  { "id": 10, "descricao": "Freelance design web",     "valor": 320.00,  "tipo": "receita", "categoria": "Trabalho",    "data": "2026-08-14" },
+  { "id": 11, "descricao": "Jantar de aniversário",    "valor": 64.00,   "tipo": "despesa", "categoria": "Lazer",       "data": "2026-08-16" },
+  { "id": 12, "descricao": "Passe Navegante",          "valor": 40.00,   "tipo": "despesa", "categoria": "Transportes", "data": "2026-08-20" },
+  { "id": 13, "descricao": "Consulta dentista",        "valor": 55.00,   "tipo": "despesa", "categoria": "Saúde",       "data": "2026-08-25" },
+  { "id": 14, "descricao": "Salário",                  "valor": 1450.00, "tipo": "receita", "categoria": "Trabalho",    "data": "2026-09-01" },
+  { "id": 15, "descricao": "Renda do apartamento",     "valor": 550.00,  "tipo": "despesa", "categoria": "Habitação",   "data": "2026-09-02" },
+  { "id": 16, "descricao": "Supermercado Continente",  "valor": 94.30,   "tipo": "despesa", "categoria": "Alimentação", "data": "2026-09-05" },
+  { "id": 17, "descricao": "Passe Navegante",          "valor": 40.00,   "tipo": "despesa", "categoria": "Transportes", "data": "2026-09-06" },
+  { "id": 18, "descricao": "Venda de bicicleta usada", "valor": 150.00,  "tipo": "receita", "categoria": "Outros",      "data": "2026-09-12" },
+  { "id": 19, "descricao": "Restaurante Alma",         "valor": 48.50,   "tipo": "despesa", "categoria": "Lazer",       "data": "2026-09-19" },
+  { "id": 20, "descricao": "Combustível",              "valor": 60.00,   "tipo": "despesa", "categoria": "Transportes", "data": "2026-09-23" }
+]
