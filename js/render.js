@@ -1,5 +1,5 @@
 import { formatarData,formatarMoeda } from "./utils.js";
-import { calcularTotais } from "../calculos.js";
+import { calcularTotais } from "./calculos.js";
 
 export function criarLinha(mov)
 {
