@@ -2,6 +2,7 @@ import { carregarDados } from "./api.js";
 import { renderLista, renderResumo } from "./render.js";
 import { calcularTotais } from "./calculos.js";
 import { validarForm } from "./validacoes.js";
+import { gerarId } from "./utils.js";
 
 const listaEl = document.getElementById("lista-movimentos");
 const form = document.getElementById("form-movimento");
@@ -10,8 +11,9 @@ const erroForm = document.getElementById("erro-form");
 let dados = await carregarDados();
 
 function lerFormulario() {
+
   return {
-    id: Date.now(),
+    id: gerarId,
     descricao: document.getElementById("descricao").value,
     valor: parseFloat(document.getElementById("valor").value),
     tipo: document.getElementById("tipo").value,
@@ -21,8 +23,13 @@ function lerFormulario() {
 }
 
 function atualizar() {
-  renderLista(listaEl, dados);
+  renderLista(listaEl, dados,apagar);
   renderResumo(calcularTotais(dados));
+}
+
+function apagar(id) {
+  dados = dados.filter((mov) => mov.id !== id);
+  atualizar();
 }
 
 form.addEventListener("submit", (event) => {

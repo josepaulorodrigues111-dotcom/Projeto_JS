@@ -160,6 +160,69 @@ button {
   border-radius: 999px;
 }
 
+.movimento {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.movimento .desc {
+  flex: 1;              /* ocupa o espaço livre e empurra o resto para a direita */
+  font-weight: bold;
+}
+
+.movimento .categoria,
+.movimento .data {
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.receita .valor { color: #16a34a; font-weight: bold; }
+.despesa .valor { color: #dc2626; font-weight: bold; }
+
+.apagar {
+  width: auto;          /* anula o 100% global */
+  margin-top: 0;        /* anula a margem global */
+  padding: 6px 8px;
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  font-size: 1rem;
+}
+
+.apagar:hover {
+  background: #fee2e2;
+  border-color: #dc2626;
+}
+
+.layout-principal {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+  align-items: stretch;   /* antes: start */
+}
+
+#movimentos {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+#lista-movimentos {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+#movimentos {
+  height: 0;
+  min-height: 100%;
+}
 /* ---------- Mobile ---------- */
 @media (max-width: 800px) {
   .layout-principal {

@@ -1,7 +1,7 @@
 import { formatarData,formatarMoeda } from "./utils.js";
-import { calcularTotais } from "./calculos.js";
 
-export function criarLinha(mov)
+
+export function criarLinha(mov,aoApagar)
 {
     const li = document.createElement("li");
     li.className = `movimento ${mov.tipo}`;
@@ -22,13 +22,20 @@ export function criarLinha(mov)
     valor.className="valor";
     valor.textContent = formatarMoeda(mov.valor);
 
-    li.append(desc,categoria,data,valor);
+    const button= document.createElement("button");
+    button.className= "apagar";
+    button.textContent = "🗑️";
+    button.title = "Apagar movimento";
+    button.setAttribute("aria-label", "Apagar movimento");
+    button.addEventListener("click", () => aoApagar(mov.id))
+
+    li.append(desc,categoria,data,valor,button);
 
     return li;
 }
 
-export function renderLista(container, movimentos) {
-  container.replaceChildren(...movimentos.map(criarLinha));
+export function renderLista(container, movimentos,aoApagar) {
+  container.replaceChildren(...movimentos.map((mov) => criarLinha(mov, aoApagar)));
 }
 
 export function renderResumo(totais)
