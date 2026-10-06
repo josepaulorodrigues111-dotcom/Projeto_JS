@@ -4,7 +4,7 @@ import { calcularTotais } from "./calculos.js";
 import { validarForm } from "./validacoes.js";
 import { aplicarFiltros } from "./filtros.js";
 import { gerarId } from "./utils.js";
-import { permanente } from "./storage.js";
+import { permanente,sessao } from "./storage.js";
 
 
 const listaEl = document.getElementById("lista-movimentos");
@@ -42,6 +42,7 @@ function lerFiltros() {
 function atualizar() {
   const visiveis = aplicarFiltros(dados, lerFiltros());
 
+  sessao.guardar("filtros",lerFiltros());
   renderLista(listaEl, visiveis, apagar);
   renderResumo(calcularTotais(dados));
   permanente.guardar("movimentos", dados);
@@ -74,5 +75,14 @@ pesquisaEl.addEventListener("input", atualizar);
 filtroTipoEl.addEventListener("change", atualizar);
 filtroCategoriaEl.addEventListener("change", atualizar);
 
+
+const filtrosGuardados= sessao.ler("filtros");
+
+if (filtrosGuardados!== null)
+{
+  pesquisaEl.value =filtrosGuardados.pesquisa;
+  filtroTipoEl.value = filtrosGuardados.tipo;
+  filtroCategoriaEl.value= filtrosGuardados.categoria;
+}
 
 atualizar();

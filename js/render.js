@@ -35,6 +35,18 @@ export function criarLinha(mov,aoApagar)
 }
 
 export function renderLista(container, movimentos,aoApagar) {
+
+  if (movimentos.length === 0){
+    
+    const vazio = document.createElement("li");
+    vazio.className = "vazio";
+    vazio.textContent= "Sem movimentos para mostrar";
+
+    container.replaceChildren(vazio);
+    return;
+
+
+  }
   container.replaceChildren(...movimentos.map((mov) => criarLinha(mov, aoApagar)));
 }
 
