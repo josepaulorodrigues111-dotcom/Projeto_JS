@@ -2,19 +2,26 @@ import { carregarDados } from "./api.js";
 import { renderLista, renderResumo } from "./render.js";
 import { calcularTotais } from "./calculos.js";
 import { validarForm } from "./validacoes.js";
+import { aplicarFiltros } from "./filtros.js";
 import { gerarId } from "./utils.js";
 import { permanente } from "./storage.js";
+
 
 const listaEl = document.getElementById("lista-movimentos");
 const form = document.getElementById("form-movimento");
 const erroForm = document.getElementById("erro-form");
+const pesquisaEl = document.getElementById("pesquisa");
+const filtroTipoEl = document.getElementById("filtro-tipo");
+const filtroCategoriaEl = document.getElementById("filtro-categoria");
+
+
 
 let dados = permanente.ler("movimentos") ?? (await carregarDados());
 
-function lerFormulario() {
 
+function lerFormulario() {
   return {
-    id: gerarId,
+    id: gerarId(dados),
     descricao: document.getElementById("descricao").value,
     valor: parseFloat(document.getElementById("valor").value),
     tipo: document.getElementById("tipo").value,
@@ -23,8 +30,19 @@ function lerFormulario() {
   };
 }
 
+function lerFiltros() {
+  return {
+    pesquisa: pesquisaEl.value,
+    tipo: filtroTipoEl.value,
+    categoria: filtroCategoriaEl.value,
+  };
+}
+
+
 function atualizar() {
-  renderLista(listaEl, dados, apagar);
+  const visiveis = aplicarFiltros(dados, lerFiltros());
+
+  renderLista(listaEl, visiveis, apagar);
   renderResumo(calcularTotais(dados));
   permanente.guardar("movimentos", dados);
 }
@@ -33,6 +51,7 @@ function apagar(id) {
   dados = dados.filter((mov) => mov.id !== id);
   atualizar();
 }
+
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -50,5 +69,10 @@ form.addEventListener("submit", (event) => {
     form.reset();
   }
 });
+
+pesquisaEl.addEventListener("input", atualizar);
+filtroTipoEl.addEventListener("change", atualizar);
+filtroCategoriaEl.addEventListener("change", atualizar);
+
 
 atualizar();
