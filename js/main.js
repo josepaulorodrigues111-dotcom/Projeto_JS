@@ -13,6 +13,7 @@ const erroForm = document.getElementById("erro-form");
 const pesquisaEl = document.getElementById("pesquisa");
 const filtroTipoEl = document.getElementById("filtro-tipo");
 const filtroCategoriaEl = document.getElementById("filtro-categoria");
+const filtroOrdemEl = document.getElementById("filtro-ordem");
 
 
 
@@ -35,6 +36,7 @@ function lerFiltros() {
     pesquisa: pesquisaEl.value,
     tipo: filtroTipoEl.value,
     categoria: filtroCategoriaEl.value,
+    ordem: filtroOrdemEl.value,
   };
 }
 
@@ -74,15 +76,15 @@ form.addEventListener("submit", (event) => {
 pesquisaEl.addEventListener("input", atualizar);
 filtroTipoEl.addEventListener("change", atualizar);
 filtroCategoriaEl.addEventListener("change", atualizar);
-
+filtroOrdemEl.addEventListener("change", atualizar);
 
 const filtrosGuardados= sessao.ler("filtros");
 
-if (filtrosGuardados!== null)
-{
-  pesquisaEl.value =filtrosGuardados.pesquisa;
+if (filtrosGuardados !== null) {
+  pesquisaEl.value = filtrosGuardados.pesquisa;
   filtroTipoEl.value = filtrosGuardados.tipo;
-  filtroCategoriaEl.value= filtrosGuardados.categoria;
+  filtroCategoriaEl.value = filtrosGuardados.categoria;
+  filtroOrdemEl.value = filtrosGuardados.ordem ?? "recentes";
 }
 
 atualizar();

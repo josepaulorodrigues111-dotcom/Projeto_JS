@@ -40,7 +40,7 @@ export function renderLista(container, movimentos,aoApagar) {
     
     const vazio = document.createElement("li");
     vazio.className = "vazio";
-    vazio.textContent= "Sem movimentos para mostrar";
+    vazio.textContent= "Sem movimentos a mostrar";
 
     container.replaceChildren(vazio);
     return;

@@ -118,7 +118,7 @@ button {
 /* ---------- Filtros (dentro dos movimentos) ---------- */
 #filtros {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 12px;
   margin-bottom: 16px;
 }
