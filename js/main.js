@@ -3,12 +3,13 @@ import { renderLista, renderResumo } from "./render.js";
 import { calcularTotais } from "./calculos.js";
 import { validarForm } from "./validacoes.js";
 import { gerarId } from "./utils.js";
+import { permanente } from "./storage.js";
 
 const listaEl = document.getElementById("lista-movimentos");
 const form = document.getElementById("form-movimento");
 const erroForm = document.getElementById("erro-form");
 
-let dados = await carregarDados();
+let dados = permanente.ler("movimentos") ?? (await carregarDados());
 
 function lerFormulario() {
 
@@ -23,8 +24,9 @@ function lerFormulario() {
 }
 
 function atualizar() {
-  renderLista(listaEl, dados,apagar);
+  renderLista(listaEl, dados, apagar);
   renderResumo(calcularTotais(dados));
+  permanente.guardar("movimentos", dados);
 }
 
 function apagar(id) {
