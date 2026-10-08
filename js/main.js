@@ -15,6 +15,7 @@ const pesquisaEl = document.getElementById("pesquisa");
 const filtroTipoEl = document.getElementById("filtro-tipo");
 const filtroCategoriaEl = document.getElementById("filtro-categoria");
 const filtroOrdemEl = document.getElementById("filtro-ordem");
+const sucessoForm = document.getElementById("sucesso-form");
 
 
 const dadosIniciais = permanente.ler("movimentos") ?? (await carregarDados());
@@ -66,15 +67,21 @@ form.addEventListener("submit", (event) => {
   const novoMovimento = lerFormulario();
   const erro = validarForm(novoMovimento);
 
-  if (erro) {
+if (erro) {
     erroForm.textContent = erro;
     erroForm.hidden = false;
-  } else {
+    sucessoForm.hidden = true;
+} else {
     estado.adicionar(novoMovimento);
     atualizar();
+
     erroForm.hidden = true;
+
+    sucessoForm.textContent = "Movimento adicionado com sucesso!";
+    sucessoForm.hidden = false;
+
     form.reset();
-  }
+}
 });
 
 pesquisaEl.addEventListener("input", atualizar);

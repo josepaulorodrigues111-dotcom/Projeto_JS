@@ -1,4 +1,3 @@
-
 /* ---------- Reset e base ---------- */
 * {
   margin: 0;
@@ -26,7 +25,6 @@ header {
   margin-bottom: 24px;
   padding-top: 14px;
   padding-bottom: 14px;
-  /* fundo ocupa a largura toda; o conteúdo alinha com o resto da página */
   padding-left: max(16px, calc((100% - 1100px) / 2));
   padding-right: max(16px, calc((100% - 1100px) / 2));
   background: #1e3a5f;
@@ -123,6 +121,16 @@ button {
   font-size: 0.9rem;
 }
 
+.sucesso {
+    margin-top: 12px;
+    padding: 10px;
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    border-radius: 8px;
+    color: #166534;
+    font-size: 0.9rem;
+}
+
 /* ---------- Resumo (3 cartões) ---------- */
 #resumo {
   display: grid;
@@ -143,9 +151,20 @@ button {
   border-radius: 12px;
 }
 
-.cartao:nth-child(1) { background: #eff6ff; border-color: #bfdbfe; }
-.cartao:nth-child(2) { background: #f0fdf4; border-color: #bbf7d0; }
-.cartao:nth-child(3) { background: #fef2f2; border-color: #fecaca; }
+.cartao:nth-child(1) {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.cartao:nth-child(2) {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.cartao:nth-child(3) {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
 
 .cartao .icone {
   grid-column: 1;
@@ -159,9 +178,17 @@ button {
   font-size: 1.4rem;
 }
 
-.cartao:nth-child(1) .icone { background: #dbeafe; }
-.cartao:nth-child(2) .icone { background: #dcfce7; }
-.cartao:nth-child(3) .icone { background: #fee2e2; }
+.cartao:nth-child(1) .icone {
+  background: #dbeafe;
+}
+
+.cartao:nth-child(2) .icone {
+  background: #dcfce7;
+}
+
+.cartao:nth-child(3) .icone {
+  background: #fee2e2;
+}
 
 .cartao p {
   grid-column: 2;
@@ -169,8 +196,13 @@ button {
   color: #475569;
 }
 
-.cartao:nth-child(2) p { color: #16a34a; }
-.cartao:nth-child(3) p { color: #dc2626; }
+.cartao:nth-child(2) p {
+  color: #16a34a;
+}
+
+.cartao:nth-child(3) p {
+  color: #dc2626;
+}
 
 .cartao span {
   grid-column: 2;
@@ -180,13 +212,18 @@ button {
   color: #1e3a5f;
 }
 
-#receitas { color: #16a34a; }
-#despesas { color: #dc2626; }
+#receitas {
+  color: #16a34a;
+}
+
+#despesas {
+  color: #dc2626;
+}
 
 /* ---------- Grelha principal (formulário + movimentos) ---------- */
 .layout-principal {
   display: grid;
-  grid-template-columns: 1fr 1.7fr;
+  grid-template-columns: 1fr 1.9fr;
   gap: 24px;
   align-items: stretch;
 }
@@ -201,13 +238,41 @@ button {
   flex-direction: column;
 }
 
-#filtros {
+.nomes-filtros,
+.campos-filtros {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
-  margin-bottom: 16px;
 }
 
+.nomes-filtros {
+  margin-bottom: 4px;
+}
+
+.nomes-filtros span:first-child {
+  grid-column: 2;
+}
+
+.nomes-filtros span {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #1e3a5f;
+}
+
+/* Cabeçalho da lista de movimentos */
+.cabecalho-movimentos {
+  display: grid;
+  grid-template-columns: 2fr 1.3fr 1fr 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px 8px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #64748b;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Lista */
 #lista-movimentos {
   list-style: none;
   max-height: 380px;
@@ -215,6 +280,7 @@ button {
   padding-right: 4px;
 }
 
+/* Cada movimento */
 .movimento {
   display: grid;
   grid-template-columns: 2fr 1.3fr 1fr 1fr auto;
@@ -247,9 +313,15 @@ button {
   font-weight: bold;
 }
 
-.receita .valor { color: #16a34a; }
-.despesa .valor { color: #dc2626; }
+.receita .valor {
+  color: #16a34a;
+}
 
+.despesa .valor {
+  color: #dc2626;
+}
+
+/* Botão apagar */
 .apagar {
   width: 34px;
   height: 34px;
@@ -304,15 +376,30 @@ button {
   transition: width 0.4s ease;
 }
 
-/* cores diferentes por posição (opcional) */
-#lista-categorias li:nth-child(2) .barra-preenchida { background: #4f46e5; }
-#lista-categorias li:nth-child(3) .barra-preenchida { background: #16a34a; }
-#lista-categorias li:nth-child(4) .barra-preenchida { background: #f59e0b; }
-#lista-categorias li:nth-child(5) .barra-preenchida { background: #a855f7; }
-#lista-categorias li:nth-child(6) .barra-preenchida { background: #ec4899; }
+/* Cores diferentes por posição */
+#lista-categorias li:nth-child(2) .barra-preenchida {
+  background: #4f46e5;
+}
+
+#lista-categorias li:nth-child(3) .barra-preenchida {
+  background: #16a34a;
+}
+
+#lista-categorias li:nth-child(4) .barra-preenchida {
+  background: #f59e0b;
+}
+
+#lista-categorias li:nth-child(5) .barra-preenchida {
+  background: #a855f7;
+}
+
+#lista-categorias li:nth-child(6) .barra-preenchida {
+  background: #ec4899;
+}
 
 /* ---------- Tablet / Mobile ---------- */
 @media (max-width: 900px) {
+
   .layout-principal {
     grid-template-columns: 1fr;
   }
@@ -331,11 +418,17 @@ button {
 }
 
 @media (max-width: 700px) {
+
   #resumo {
     grid-template-columns: 1fr;
   }
 
-  /* linha da lista passa a duas linhas */
+  /* Cabeçalho da lista passa a acompanhar a versão mobile */
+  .cabecalho-movimentos {
+    display: none;
+  }
+
+  /* Linha da lista passa a duas linhas */
   .movimento {
     grid-template-columns: 1fr auto auto;
   }

@@ -6,7 +6,7 @@ export function validarForm(movimento) {
 
         return "A descrição é obrigatória";
     }
-
+    
     if (!/^[A-Za-zÀ-ÿ\s]+$/.test(movimento.descricao)) {
         return "A descrição só deve conter texto.";
     }
