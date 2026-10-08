@@ -3,7 +3,7 @@ export function criarEstado(dadosIniciais) {
 
   return {
     obter() {
-      return [...dados];   
+      return [...dados];
     },
     adicionar(movimento) {
       dados = [...dados, movimento];

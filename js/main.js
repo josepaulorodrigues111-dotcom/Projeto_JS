@@ -50,7 +50,7 @@ function atualizar() {
   sessao.guardar("filtros", filtros);
   renderLista(listaEl, visiveis, apagar);
   renderResumo(calcularTotais(movimentos));
-  renderDespesasCategoria(visiveis);
+  renderDespesasCategoria(movimentos);
   permanente.guardar("movimentos", movimentos);
 }
 

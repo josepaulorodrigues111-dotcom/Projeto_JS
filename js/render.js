@@ -1,52 +1,51 @@
 import { formatarData, formatarMoeda, obterIcone } from "./utils.js";
 
 
-export function criarLinha(mov,aoApagar)
-{
-    const li = document.createElement("li");
-    li.className = `movimento ${mov.tipo}`;
+export function criarLinha(mov, aoApagar) {
+  const li = document.createElement("li");
+  li.className = `movimento ${mov.tipo}`;
 
-    const desc = document.createElement("span");
-    desc.className ="desc";
-    desc.textContent= mov.descricao;
+  const desc = document.createElement("span");
+  desc.className = "desc";
+  desc.textContent = mov.descricao;
 
-    const categoria = document.createElement("span");
-    categoria.className ="categoria";
+  const categoria = document.createElement("span");
+  categoria.className = "categoria";
 
-    const iconeCategoria = document.createElement("i");
-    iconeCategoria.className = `fa-solid ${obterIcone(mov.categoria)}`;
+  const iconeCategoria = document.createElement("i");
+  iconeCategoria.className = `fa-solid ${obterIcone(mov.categoria)}`;
 
-    categoria.append(iconeCategoria, ` ${mov.categoria}`);
+  categoria.append(iconeCategoria, ` ${mov.categoria}`);
 
-    const data = document.createElement("span");
-    data.className = "data";
-    data.textContent= formatarData(mov.data);
+  const data = document.createElement("span");
+  data.className = "data";
+  data.textContent = formatarData(mov.data);
 
-    const valor= document.createElement("span");
-    valor.className="valor";
-    valor.textContent = formatarMoeda(mov.valor);
+  const valor = document.createElement("span");
+  valor.className = "valor";
+  valor.textContent = formatarMoeda(mov.valor);
 
-    const button= document.createElement("button");
-    button.className= "apagar";
-    const iconeApagar = document.createElement("i");
-    iconeApagar.className = "fa-solid fa-trash";
-    button.append(iconeApagar);
-    button.title = "Apagar movimento";
-    button.setAttribute("aria-label", "Apagar movimento");
-    button.addEventListener("click", () => aoApagar(mov.id))
+  const button = document.createElement("button");
+  button.className = "apagar";
+  const iconeApagar = document.createElement("i");
+  iconeApagar.className = "fa-solid fa-trash";
+  button.append(iconeApagar);
+  button.title = "Apagar movimento";
+  button.setAttribute("aria-label", "Apagar movimento");
+  button.addEventListener("click", () => aoApagar(mov.id))
 
-    li.append(desc,categoria,data,valor,button);
+  li.append(desc, categoria, data, valor, button);
 
-    return li;
+  return li;
 }
 
-export function renderLista(container, movimentos,aoApagar) {
+export function renderLista(container, movimentos, aoApagar) {
 
-  if (movimentos.length === 0){
-    
+  if (movimentos.length === 0) {
+
     const vazio = document.createElement("li");
     vazio.className = "vazio";
-    vazio.textContent= "Sem movimentos a mostrar";
+    vazio.textContent = "Sem movimentos a mostrar";
 
     container.replaceChildren(vazio);
     return;
@@ -56,17 +55,16 @@ export function renderLista(container, movimentos,aoApagar) {
   container.replaceChildren(...movimentos.map((mov) => criarLinha(mov, aoApagar)));
 }
 
-export function renderResumo(totais)
-{
+export function renderResumo(totais) {
 
   const saldo = document.getElementById("saldo");
   const receitas = document.getElementById("receitas");
   const despesas = document.getElementById("despesas");
 
   saldo.textContent = formatarMoeda(totais.saldo);
-  receitas.textContent= formatarMoeda(totais.receitas);
-  despesas.textContent= formatarMoeda(totais.despesas);
-  
+  receitas.textContent = formatarMoeda(totais.receitas);
+  despesas.textContent = formatarMoeda(totais.despesas);
+
 
 }
 
@@ -101,12 +99,12 @@ export function renderDespesasCategoria(movimentos) {
     const info = document.createElement("div");
     info.className = "categoria-info";
 
-   const nome = document.createElement("span");
+    const nome = document.createElement("span");
 
-   const iconeNome = document.createElement("i");
-   iconeNome.className = `fa-solid ${obterIcone(categoria)}`;
+    const iconeNome = document.createElement("i");
+    iconeNome.className = `fa-solid ${obterIcone(categoria)}`;
 
-  nome.append(iconeNome, ` ${categoria}`);
+    nome.append(iconeNome, ` ${categoria}`);
 
     const valorEl = document.createElement("span");
     valorEl.textContent = `${formatarMoeda(valor)} (${Math.round(percentagem)}%)`;
