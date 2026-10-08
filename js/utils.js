@@ -17,3 +17,17 @@ export function gerarId(movimentos) {
 
   return maior + 1;
 }
+
+export const ICONES = {
+  Alimentação: "fa-utensils",
+  Habitação: "fa-house",
+  Transportes: "fa-bus",
+  Lazer: "fa-film",
+  Saúde: "fa-plus",
+  Trabalho: "fa-briefcase",
+  Outros: "fa-box",
+};
+
+export function obterIcone(categoria) {
+  return ICONES[categoria] ?? "fa-box";
+}

@@ -1,4 +1,4 @@
-import { formatarData,formatarMoeda } from "./utils.js";
+import { formatarData, formatarMoeda, obterIcone } from "./utils.js";
 
 
 export function criarLinha(mov,aoApagar)
@@ -12,7 +12,11 @@ export function criarLinha(mov,aoApagar)
 
     const categoria = document.createElement("span");
     categoria.className ="categoria";
-    categoria.textContent=mov.categoria;
+
+    const iconeCategoria = document.createElement("i");
+    iconeCategoria.className = `fa-solid ${obterIcone(mov.categoria)}`;
+
+    categoria.append(iconeCategoria, ` ${mov.categoria}`);
 
     const data = document.createElement("span");
     data.className = "data";
@@ -24,7 +28,9 @@ export function criarLinha(mov,aoApagar)
 
     const button= document.createElement("button");
     button.className= "apagar";
-    button.textContent = "🗑️";
+    const iconeApagar = document.createElement("i");
+    iconeApagar.className = "fa-solid fa-trash";
+    button.append(iconeApagar);
     button.title = "Apagar movimento";
     button.setAttribute("aria-label", "Apagar movimento");
     button.addEventListener("click", () => aoApagar(mov.id))
@@ -62,4 +68,62 @@ export function renderResumo(totais)
   despesas.textContent= formatarMoeda(totais.despesas);
   
 
+}
+
+export function renderDespesasCategoria(movimentos) {
+  const container = document.getElementById("lista-categorias");
+
+  const despesas = movimentos.filter((mov) => mov.tipo === "despesa");
+
+  const totais = despesas.reduce((acc, mov) => {
+    acc[mov.categoria] = (acc[mov.categoria] ?? 0) + mov.valor;
+    return acc;
+  }, {});
+
+  const ordenadas = Object.entries(totais).sort((a, b) => b[1] - a[1]);
+
+  if (ordenadas.length === 0) {
+    const vazio = document.createElement("li");
+    vazio.className = "vazio";
+    vazio.textContent = "Sem despesas para mostrar";
+    container.replaceChildren(vazio);
+    return;
+  }
+
+  const totalDespesas = ordenadas.reduce((soma, [, valor]) => soma + valor, 0);
+
+  const linhas = ordenadas.map(([categoria, valor]) => {
+    const percentagem = (valor / totalDespesas) * 100;
+
+    const li = document.createElement("li");
+    li.className = "categoria-linha";
+
+    const info = document.createElement("div");
+    info.className = "categoria-info";
+
+   const nome = document.createElement("span");
+
+   const iconeNome = document.createElement("i");
+   iconeNome.className = `fa-solid ${obterIcone(categoria)}`;
+
+  nome.append(iconeNome, ` ${categoria}`);
+
+    const valorEl = document.createElement("span");
+    valorEl.textContent = `${formatarMoeda(valor)} (${Math.round(percentagem)}%)`;
+
+    info.append(nome, valorEl);
+
+    const barra = document.createElement("div");
+    barra.className = "barra";
+
+    const preenchida = document.createElement("div");
+    preenchida.className = "barra-preenchida";
+    preenchida.style.width = `${percentagem}%`;
+
+    barra.append(preenchida);
+    li.append(info, barra);
+    return li;
+  });
+
+  container.replaceChildren(...linhas);
 }

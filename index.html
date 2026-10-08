@@ -1,47 +1,59 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carteira de Finanças Pessoais</title>
     <link rel="stylesheet" href="style.css">
- 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 
 </head>
+
 <body>
 
     <header>
-        <h1>Carteira</h1>
-    </header>
 
+        <i class="fa-solid fa-wallet"></i>
+        <div>
+            <h1>Carteira</h1>
+            <p>Finanças Pessoais</p>
+        </div>
+
+    </header>
     <main>
 
-        
+
         <section id="resumo">
             <div class="cartao">
+                <i class="fa-solid fa-coins icone"></i>
                 <p>Saldo total</p>
                 <span id="saldo">0,00 €</span>
             </div>
             <div class="cartao">
+                <i class="fa-solid fa-arrow-up icone"></i>
                 <p>Receitas</p>
                 <span id="receitas">0,00 €</span>
             </div>
             <div class="cartao">
+                <i class="fa-solid fa-arrow-down icone"></i>
                 <p>Despesas</p>
                 <span id="despesas">0,00 €</span>
             </div>
         </section>
 
-       
+
         <div class="layout-principal">
 
-            
+
             <section id="novo-movimento">
                 <h2>Novo movimento</h2>
 
                 <form id="form-movimento">
                     <label for="descricao">Descrição</label>
                     <input type="text" id="descricao" placeholder="Ex: Compras supermercado" required>
+
 
                     <label for="valor">Valor (€)</label>
                     <input type="number" id="valor" step="0.01" min="0" placeholder="0,00" required>
@@ -72,7 +84,7 @@
                 </form>
             </section>
 
-            
+
             <section id="movimentos">
                 <h2>Movimentos</h2>
 
@@ -105,19 +117,23 @@
                 </div>
 
                 <ul id="lista-movimentos">
-                    
+
                 </ul>
             </section>
         </div>
 
-            <section id="despesas-categoria">
+        <section id="despesas-categoria">
             <h2>Despesas por categoria</h2>
-            <ul id="lista-categorias"></ul>
-        
+            <ul id="lista-categorias">
+
+
+            </ul>
+
         </section>
 
     </main>
 
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>

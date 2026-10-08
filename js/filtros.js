@@ -1,4 +1,5 @@
 
+
 export function aplicarFiltros(movimentos, filtros) {
   const termo = filtros.pesquisa.trim().toLowerCase();
 
