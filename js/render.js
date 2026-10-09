@@ -41,6 +41,7 @@ export function criarLinha(mov, aoApagar,aoEditar) {
     const input = document.createElement("input");
 
     input.type = "text";
+
     input.value = mov.valor;
     input.pattern = "^\d+(\.\d+)?$";
     input.required = true;
@@ -60,8 +61,23 @@ export function criarLinha(mov, aoApagar,aoEditar) {
         }
       }
     });
+      input.addEventListener("blur", () => {
+        const novoValor = parseFloat(input.value);
+
+        if (!isNaN(novoValor) && novoValor > 0) {
+          mov.valor = novoValor;
+          aoEditar();
+        }
+        else
+        {
+
+
+        }
+
+    });
 
     valor.replaceWith(input);
+    input.focus();
   });
 
   const button = document.createElement("button");
