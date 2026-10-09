@@ -66,14 +66,18 @@ form.addEventListener("submit", (event) => {
 
   const novoMovimento = lerFormulario();
   const erro = validarForm(novoMovimento);
-
+  const timestamp  = Date.now();
+  
+  
   if (erro) {
     erroForm.textContent = erro;
     erroForm.hidden = false;
     sucessoForm.hidden = true;
   } else {
-    estado.adicionar(novoMovimento);
+    estado.adicionar({...novoMovimento,timestamp});
+  
     atualizar();
+   
 
     erroForm.hidden = true;
 

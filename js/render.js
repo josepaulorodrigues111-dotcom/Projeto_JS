@@ -2,8 +2,11 @@ import { formatarData, formatarMoeda, obterIcone } from "./utils.js";
 
 
 export function criarLinha(mov, aoApagar,aoEditar) {
+
+
   const li = document.createElement("li");
   li.className = `movimento ${mov.tipo}`;
+
 
   const desc = document.createElement("span");
   desc.className = "desc";
@@ -37,8 +40,10 @@ export function criarLinha(mov, aoApagar,aoEditar) {
   valor.addEventListener("click", () => {
     const input = document.createElement("input");
 
-    input.type = "number";
+    input.type = "text";
     input.value = mov.valor;
+    input.pattern = "^\d+(\.\d+)?$";
+    input.required = true;
 
     input.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
@@ -47,6 +52,11 @@ export function criarLinha(mov, aoApagar,aoEditar) {
         if (!isNaN(novoValor) && novoValor > 0) {
           mov.valor = novoValor;
           aoEditar();
+        }
+        else
+        {
+
+
         }
       }
     });

@@ -12,13 +12,13 @@ export function validarForm(movimento) {
     }
 
     if (Number.isNaN(movimento.valor)) {
-        return "Introduza um número";
+        return " Valor : Introduza um número";
 
     }
 
     if (movimento.valor <= 0) {
 
-        return "O Valor deve ser superior a 0";
+        return "O Valor deve ser superior a 0" ;
 
     }
 
@@ -31,7 +31,7 @@ export function validarForm(movimento) {
     const dataMovimento = new Date(movimento.data);
 
     if (dataMovimento > hoje) {
-        return "A data não pode ser futura.";
+        return "Não podem ser introduzidos movimentos .";
     }
 
     const umAnoAtras = new Date();
