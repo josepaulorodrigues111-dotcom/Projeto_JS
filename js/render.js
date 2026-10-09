@@ -1,7 +1,7 @@
 import { formatarData, formatarMoeda, obterIcone } from "./utils.js";
 
 
-export function criarLinha(mov, aoApagar) {
+export function criarLinha(mov, aoApagar,aoEditar) {
   const li = document.createElement("li");
   li.className = `movimento ${mov.tipo}`;
 
@@ -23,7 +23,36 @@ export function criarLinha(mov, aoApagar) {
 
   const valor = document.createElement("span");
   valor.className = "valor";
-  valor.textContent = formatarMoeda(mov.valor);
+
+  const iconeValor = document.createElement("i");
+
+  if (mov.tipo === "receita") {
+    iconeValor.className = "fa-solid fa-arrow-up";
+  } else {
+    iconeValor.className = "fa-solid fa-arrow-down";
+  }
+
+  valor.append(iconeValor, ` ${formatarMoeda(mov.valor)}`);
+
+  valor.addEventListener("click", () => {
+    const input = document.createElement("input");
+
+    input.type = "number";
+    input.value = mov.valor;
+
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        const novoValor = parseFloat(input.value);
+
+        if (!isNaN(novoValor) && novoValor > 0) {
+          mov.valor = novoValor;
+          aoEditar();
+        }
+      }
+    });
+
+    valor.replaceWith(input);
+  });
 
   const button = document.createElement("button");
   button.className = "apagar";
@@ -39,7 +68,7 @@ export function criarLinha(mov, aoApagar) {
   return li;
 }
 
-export function renderLista(container, movimentos, aoApagar) {
+export function renderLista(container, movimentos, aoApagar,aoEditar) {
 
   if (movimentos.length === 0) {
 
@@ -52,7 +81,7 @@ export function renderLista(container, movimentos, aoApagar) {
 
 
   }
-  container.replaceChildren(...movimentos.map((mov) => criarLinha(mov, aoApagar)));
+  container.replaceChildren(...movimentos.map((mov) => criarLinha(mov, aoApagar,aoEditar)));
 }
 
 export function renderResumo(totais) {

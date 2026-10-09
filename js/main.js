@@ -49,7 +49,7 @@ function atualizar() {
   const visiveis = aplicarFiltros(movimentos, filtros);
 
   sessao.guardar("filtros", filtros);
-  renderLista(listaEl, visiveis, apagar);
+  renderLista(listaEl, visiveis, apagar,atualizar);
   renderResumo(calcularTotais(movimentos));
   renderDespesasCategoria(movimentos);
   permanente.guardar("movimentos", movimentos);
@@ -67,11 +67,11 @@ form.addEventListener("submit", (event) => {
   const novoMovimento = lerFormulario();
   const erro = validarForm(novoMovimento);
 
-if (erro) {
+  if (erro) {
     erroForm.textContent = erro;
     erroForm.hidden = false;
     sucessoForm.hidden = true;
-} else {
+  } else {
     estado.adicionar(novoMovimento);
     atualizar();
 
@@ -80,8 +80,13 @@ if (erro) {
     sucessoForm.textContent = "Movimento adicionado com sucesso!";
     sucessoForm.hidden = false;
 
+    setTimeout(() => {
+      sucessoForm.hidden = true;
+    }, 10000);
+
+
     form.reset();
-}
+  }
 });
 
 pesquisaEl.addEventListener("input", atualizar);
