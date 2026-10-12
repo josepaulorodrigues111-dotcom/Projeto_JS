@@ -7,23 +7,21 @@
     <title>Carteira de Finanças Pessoais</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-
 </head>
 
 <body>
 
     <header>
-
         <i class="fa-solid fa-wallet"></i>
         <div>
             <h1>Carteira</h1>
             <p>Finanças Pessoais</p>
         </div>
-
     </header>
+
     <main>
 
+        <!-- Resumo -->
         <section id="resumo">
             <div class="cartao">
                 <i class="fa-solid fa-coins icone"></i>
@@ -42,19 +40,19 @@
             </div>
         </section>
 
-
+        <!-- Grelha: formulário à esquerda, movimentos à direita -->
         <div class="layout-principal">
 
-
+            <!-- Formulário -->
             <section id="novo-movimento">
                 <h2>Novo movimento</h2>
 
-                <form id="form-movimento">
+                <form id="form-movimento" novalidate>
                     <label for="descricao">Descrição</label>
-                    <input type="text" id="descricao" maxlength="30" placeholder="Ex: Compras supermercado" required>
+                    <input type="text" id="descricao" maxlength="50" placeholder="Ex: Compras supermercado" required>
 
                     <label for="valor">Valor (€)</label>
-                    <input type="text" id="valor" placeholder="0,00" required>
+                    <input type="text" id="valor" inputmode="decimal" placeholder="0,00" required>
 
                     <label for="tipo">Tipo</label>
                     <select id="tipo">
@@ -80,12 +78,12 @@
 
                     <button type="submit" id="add-mov">+ Adicionar</button>
                     <p id="sucesso-form" class="sucesso" hidden></p>
-            </form>
+                </form>
             </section>
 
-
+            <!-- Filtros + lista -->
             <section id="movimentos">
-                <h2>Movimentos </h2>
+                <h2>Movimentos</h2>
 
                 <div id="filtros">
 
@@ -116,32 +114,43 @@
                         </select>
 
                         <select id="filtro-ordem">
-                            <option value="">Filtros</option>
-                            <option value="recentes">Mais Recentes</option>
-                            <option value="antigos">Mais Antigos</option>
-                            <option value="valor">Maior Valor</option>
+                            <option value="recentes">Mais recentes</option>
+                            <option value="antigos">Mais antigos</option>
+                            <option value="valor">Maior valor</option>
                         </select>
                     </div>
 
                 </div>
 
+                <div class="cabecalho-movimentos">
+                    <span>Descrição</span>
+                    <span>Categoria</span>
+                    <span>Data</span>
+                    <span>Valor</span>
+                    <span></span>
+                </div>
 
-                <ul id="lista-movimentos">
-
-                </ul>
+                <ul id="lista-movimentos"></ul>
             </section>
+
         </div>
 
+        <!-- Despesas por categoria -->
         <section id="despesas-categoria">
             <h2>Despesas por categoria</h2>
-            <ul id="lista-categorias">
-
-
-            </ul>
-
+            <ul id="lista-categorias"></ul>
         </section>
 
     </main>
+
+    <footer>
+        <p>Carteira de Finanças Pessoais</p>
+        <p>
+            José Paulo Rodrigues ·
+            <a href="https://github.com/josepaulorodrigues111-dotcom/Projeto_JS" target="_blank"
+                rel="noopener">GitHub</a>
+        </p>
+    </footer>
 
     <script type="module" src="js/main.js"></script>
 </body>

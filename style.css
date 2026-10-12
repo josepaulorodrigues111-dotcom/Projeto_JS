@@ -1,3 +1,7 @@
+/* ==========================================================
+   Carteira - Finanças Pessoais
+   ========================================================== */
+
 /* ---------- Reset e base ---------- */
 * {
   margin: 0;
@@ -6,13 +10,16 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: Arial, sans-serif;
   color: #0f172a;
   background: #f4f7fb;
   line-height: 1.5;
 }
 
-/* Ícones Font Awesome: todos pretos */
+/* Ícones a preto */
 .fa-solid {
   color: #000000;
 }
@@ -48,6 +55,8 @@ header p {
 
 /* ---------- Layout geral ---------- */
 main {
+  flex: 1;
+  width: 100%;
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 16px 32px;
@@ -67,7 +76,7 @@ h2 {
   color: #1e3a5f;
 }
 
-/* ---------- Formulários ---------- */
+/* ---------- Formulário ---------- */
 label {
   display: block;
   margin-top: 12px;
@@ -93,6 +102,18 @@ select:focus {
   outline: none;
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Esconder as setas do campo número */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 button {
@@ -122,13 +143,13 @@ button {
 }
 
 .sucesso {
-    margin-top: 12px;
-    padding: 10px;
-    background: #dcfce7;
-    border: 1px solid #86efac;
-    border-radius: 8px;
-    color: #166534;
-    font-size: 0.9rem;
+  margin-top: 12px;
+  padding: 10px;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  color: #166534;
+  font-size: 0.9rem;
 }
 
 /* ---------- Resumo (3 cartões) ---------- */
@@ -226,6 +247,7 @@ button {
   grid-template-columns: 1fr 1.9fr;
   gap: 24px;
   align-items: stretch;
+  margin-bottom: 24px;
 }
 
 .layout-principal section {
@@ -257,6 +279,10 @@ button {
   font-size: 0.9rem;
   font-weight: bold;
   color: #1e3a5f;
+}
+
+.campos-filtros {
+  margin-bottom: 16px;
 }
 
 /* Cabeçalho da lista de movimentos */
@@ -316,9 +342,6 @@ button {
   font-weight: bold;
 }
 
-.movimento .valor .fa-solid {
-  color: #000000;
-}
 .receita .valor {
   color: #16a34a;
 }
@@ -382,7 +405,7 @@ button {
   transition: width 0.4s ease;
 }
 
-/* Cores diferentes por posição */
+/* Cores diferentes por posição (barras) */
 #lista-categorias li:nth-child(2) .barra-preenchida {
   background: #4f46e5;
 }
@@ -403,18 +426,38 @@ button {
   background: #ec4899;
 }
 
-/* ---------- Tablet / Mobile ---------- */
-@media (max-width: 900px) {
+/* ---------- Footer ---------- */
+footer {
+  margin-top: 8px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: max(16px, calc((100% - 1100px) / 2));
+  padding-right: max(16px, calc((100% - 1100px) / 2));
+  background: #1e3a5f;
+  color: #cbd5e1;
+  font-size: 0.85rem;
+  text-align: center;
+}
 
+footer a {
+  color: #ffffff;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
   .layout-principal {
     grid-template-columns: 1fr;
   }
 
-  #filtros {
+  .nomes-filtros {
+    display: none;
+  }
+
+  .campos-filtros {
     grid-template-columns: 1fr 1fr;
   }
 
-  #filtros #pesquisa {
+  .campos-filtros #pesquisa {
     grid-column: 1 / -1;
   }
 
@@ -424,40 +467,70 @@ button {
 }
 
 @media (max-width: 700px) {
-
   #resumo {
     grid-template-columns: 1fr;
   }
 
-  /* Cabeçalho da lista passa a acompanhar a versão mobile */
   .cabecalho-movimentos {
     display: none;
   }
 
-  /* Linha da lista passa a duas linhas */
+  /* Cada movimento passa a 2 linhas:
+     linha 1: descrição | valor | apagar
+     linha 2: categoria | data  | apagar */
   .movimento {
-    grid-template-columns: 1fr auto auto;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-rows: auto auto;
+    column-gap: 10px;
+    row-gap: 2px;
+    padding: 12px 6px;
   }
 
   .movimento .desc {
-    grid-column: 1 / -1;
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .movimento .valor {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-end;
+    white-space: nowrap;
   }
 
   .movimento .categoria {
     grid-column: 1;
+    grid-row: 2;
   }
 
   .movimento .data {
     grid-column: 2;
-  }
-
-  .movimento .valor {
-    grid-column: 1;
-    text-align: left;
+    grid-row: 2;
+    text-align: right;
+    white-space: nowrap;
   }
 
   .movimento .apagar {
     grid-column: 3;
-    grid-row: 2 / 4;
+    grid-row: 1 / 3;
+    align-self: center;
+  }
+
+  #lista-movimentos {
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .campos-filtros {
+    grid-template-columns: 1fr;
+  }
+
+  section {
+    padding: 16px;
   }
 }

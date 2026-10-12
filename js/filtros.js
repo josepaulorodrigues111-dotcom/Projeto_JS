@@ -6,16 +6,20 @@ export function aplicarFiltros(movimentos, filtros) {
     .filter((mov) => filtros.categoria === "" || mov.categoria === filtros.categoria)
     .filter((mov) => mov.descricao.toLowerCase().includes(termo));
 
-  console.log(filtrados);
-
   switch (filtros.ordem) {
     case "valor":
       return [...filtrados].sort((a, b) => b.valor - a.valor);
     case "antigos":
-      return [...filtrados].sort((a, b) => a.timestamp - b.timestamp);
+      return [...filtrados].sort(
+        (a, b) =>
+          a.data.localeCompare(b.data) ||
+          (a.timestamp ?? 0) - (b.timestamp ?? 0)
+      );
     default:
-      return [...filtrados].sort((a, b) => b.timestamp - a.timestamp);
-
-
+      return [...filtrados].sort(
+        (a, b) =>
+          b.data.localeCompare(a.data) ||
+          (b.timestamp ?? 0) - (a.timestamp ?? 0)
+      );
   }
 }
