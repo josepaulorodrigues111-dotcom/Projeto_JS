@@ -1,8 +1,3 @@
-/* ==========================================================
-   Carteira - Finanças Pessoais
-   ========================================================== */
-
-/* ---------- Reset e base ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -24,16 +19,13 @@ body {
   color: #000000;
 }
 
-/* ---------- Cabeçalho ---------- */
+/* HEADER */
 header {
   display: flex;
   align-items: center;
   gap: 14px;
   margin-bottom: 24px;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-left: max(16px, calc((100% - 1100px) / 2));
-  padding-right: max(16px, calc((100% - 1100px) / 2));
+  padding: 14px max(16px, calc((100% - 1100px) / 2));
   background: #1e3a5f;
   color: #ffffff;
 }
@@ -53,7 +45,7 @@ header p {
   color: #cbd5e1;
 }
 
-/* ---------- Layout geral ---------- */
+/* LAYOUT PRINCIPAL */
 main {
   flex: 1;
   width: 100%;
@@ -76,7 +68,7 @@ h2 {
   color: #1e3a5f;
 }
 
-/* ---------- Formulário ---------- */
+/* FORMULARIO */
 label {
   display: block;
   margin-top: 12px;
@@ -89,6 +81,7 @@ label {
 input,
 select {
   width: 100%;
+  min-width: 0;
   padding: 10px 12px;
   background: #ffffff;
   border: 1px solid #d5dbe5;
@@ -104,23 +97,6 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
-/* Esconder as setas do campo número */
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
-
-button {
-  cursor: pointer;
-  font-size: 1rem;
-}
-
 #add-mov {
   width: 100%;
   margin-top: 18px;
@@ -130,6 +106,7 @@ button {
   border: none;
   border-radius: 8px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 #add-mov:hover {
@@ -152,10 +129,10 @@ button {
   font-size: 0.9rem;
 }
 
-/* ---------- Resumo (3 cartões) ---------- */
+/* CARTOS DE RESUMO */
 #resumo {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   padding: 0;
   background: none;
@@ -164,9 +141,10 @@ button {
 
 .cartao {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   column-gap: 16px;
   align-items: center;
+  min-width: 0;
   padding: 18px;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
@@ -231,6 +209,7 @@ button {
   font-size: 1.7rem;
   font-weight: bold;
   color: #1e3a5f;
+  overflow-wrap: anywhere;
 }
 
 #receitas {
@@ -241,10 +220,10 @@ button {
   color: #dc2626;
 }
 
-/* ---------- Grelha principal (formulário + movimentos) ---------- */
+/* ---------- Grelha: formulário + movimentos ---------- */
 .layout-principal {
   display: grid;
-  grid-template-columns: 1fr 1.9fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr);
   gap: 24px;
   align-items: stretch;
   margin-bottom: 24px;
@@ -258,21 +237,19 @@ button {
 #movimentos {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
+/* Filtros */
 .nomes-filtros,
 .campos-filtros {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
 }
 
 .nomes-filtros {
   margin-bottom: 4px;
-}
-
-.nomes-filtros span:first-child {
-  grid-column: 2;
 }
 
 .nomes-filtros span {
@@ -281,11 +258,23 @@ button {
   color: #1e3a5f;
 }
 
+.nomes-filtros span:nth-child(1) {
+  grid-column: 2;
+}
+
+.nomes-filtros span:nth-child(2) {
+  grid-column: 3;
+}
+
+.nomes-filtros span:nth-child(3) {
+  grid-column: 4;
+}
+
 .campos-filtros {
   margin-bottom: 16px;
 }
 
-/* Cabeçalho da lista de movimentos */
+/* Cabeçalho da lista */
 .cabecalho-movimentos {
   display: grid;
   grid-template-columns: 2fr 1.3fr 1fr 1fr auto;
@@ -298,7 +287,7 @@ button {
   border-bottom: 1px solid #e2e8f0;
 }
 
-/* Lista */
+/* Lista de movimentos */
 #lista-movimentos {
   list-style: none;
   max-height: 380px;
@@ -322,6 +311,7 @@ button {
 
 .movimento .desc {
   font-weight: bold;
+  overflow-wrap: anywhere;
 }
 
 .movimento .categoria,
@@ -340,6 +330,7 @@ button {
   justify-content: flex-end;
   gap: 6px;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .receita .valor {
@@ -350,7 +341,7 @@ button {
   color: #dc2626;
 }
 
-/* Botão apagar */
+/* Botão apagar movimento */
 .apagar {
   width: 34px;
   height: 34px;
@@ -358,6 +349,7 @@ button {
   background: #f1f5f9;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .apagar:hover {
@@ -371,17 +363,73 @@ button {
   color: #64748b;
 }
 
-/* ---------- Despesas por categoria ---------- */
+/* MODAL PARA APAGAR MOVIMENTO */
+dialog {
+  width: 90%;
+  max-width: 380px;
+  margin: auto;
+  padding: 24px;
+  background: #ffffff;
+  color: #0f172a;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.3);
+}
+
+dialog::backdrop {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+dialog h3 {
+  margin-bottom: 10px;
+  color: #1e3a5f;
+}
+
+#modal-texto {
+  overflow-wrap: anywhere;
+}
+
+.modal-botoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-botoes button {
+  padding: 10px 16px;
+  background: #ffffff;
+  border: 1px solid #d5dbe5;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#modal-cancelar:hover {
+  background: #f1f5f9;
+}
+
+#modal-confirmar {
+  background: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff;
+}
+
+#modal-confirmar:hover {
+  background: #b91c1c;
+}
+
+/*  RESUMO DESPESAS */
 #lista-categorias {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px 40px;
 }
 
 .categoria-info {
   display: flex;
   justify-content: space-between;
+  gap: 10px;
   margin-bottom: 6px;
   font-size: 0.9rem;
   font-weight: bold;
@@ -405,7 +453,7 @@ button {
   transition: width 0.4s ease;
 }
 
-/* Cores diferentes por posição (barras) */
+/* Cores diferentes por posição das barras */
 #lista-categorias li:nth-child(2) .barra-preenchida {
   background: #4f46e5;
 }
@@ -426,13 +474,10 @@ button {
   background: #ec4899;
 }
 
-/* ---------- Footer ---------- */
+/* footer */
 footer {
   margin-top: 8px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: max(16px, calc((100% - 1100px) / 2));
-  padding-right: max(16px, calc((100% - 1100px) / 2));
+  padding: 20px max(16px, calc((100% - 1100px) / 2));
   background: #1e3a5f;
   color: #cbd5e1;
   font-size: 0.85rem;
@@ -443,10 +488,14 @@ footer a {
   color: #ffffff;
 }
 
-/* ---------- Responsivo ---------- */
+footer a:hover {
+  color: #bfdbfe;
+}
+
+
 @media (max-width: 900px) {
   .layout-principal {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .nomes-filtros {
@@ -454,7 +503,7 @@ footer a {
   }
 
   .campos-filtros {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .campos-filtros #pesquisa {
@@ -462,22 +511,21 @@ footer a {
   }
 
   #lista-categorias {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
+
 @media (max-width: 700px) {
   #resumo {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .cabecalho-movimentos {
     display: none;
   }
 
-  /* Cada movimento passa a 2 linhas:
-     linha 1: descrição | valor | apagar
-     linha 2: categoria | data  | apagar */
+ 
   .movimento {
     grid-template-columns: minmax(0, 1fr) auto auto;
     grid-template-rows: auto auto;
@@ -505,6 +553,8 @@ footer a {
   .movimento .categoria {
     grid-column: 1;
     grid-row: 2;
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .movimento .data {
@@ -525,12 +575,25 @@ footer a {
   }
 }
 
+/* Ecrãs mais Pequenos */
 @media (max-width: 480px) {
   .campos-filtros {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   section {
     padding: 16px;
+  }
+
+  .cartao {
+    padding: 14px;
+  }
+
+  .cartao span {
+    font-size: 1.4rem;
+  }
+
+  .modal-botoes button {
+    padding: 10px 12px;
   }
 }

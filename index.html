@@ -21,7 +21,7 @@
 
     <main>
 
-        <!-- Resumo -->
+        
         <section id="resumo">
             <div class="cartao">
                 <i class="fa-solid fa-coins icone"></i>
@@ -40,10 +40,9 @@
             </div>
         </section>
 
-        <!-- Grelha: formulário à esquerda, movimentos à direita -->
+        
         <div class="layout-principal">
 
-            <!-- Formulário -->
             <section id="novo-movimento">
                 <h2>Novo movimento</h2>
 
@@ -81,7 +80,7 @@
                 </form>
             </section>
 
-            <!-- Filtros + lista -->
+           
             <section id="movimentos">
                 <h2>Movimentos</h2>
 
@@ -135,13 +134,23 @@
 
         </div>
 
-        <!-- Despesas por categoria -->
         <section id="despesas-categoria">
             <h2>Despesas por categoria</h2>
             <ul id="lista-categorias"></ul>
         </section>
 
     </main>
+
+
+    <dialog id="modal-apagar">
+        <h3>Apagar movimento?</h3>
+        <p id="modal-texto"></p>
+        <div class="modal-botoes">
+            <button type="button" id="modal-cancelar">Cancelar</button>
+            <button type="button" id="modal-confirmar">Apagar</button>
+        </div>
+    </dialog>
+
 
     <footer>
         <p>Carteira de Finanças Pessoais</p>
