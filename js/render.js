@@ -1,7 +1,7 @@
 import { formatarData, formatarMoeda, obterIcone } from "./utils.js";
 
 
-export function criarLinha(mov, aoApagar,aoEditar) {
+export function criarLinha(mov, aoApagar, aoEditar) {
 
 
   const li = document.createElement("li");
@@ -35,50 +35,46 @@ export function criarLinha(mov, aoApagar,aoEditar) {
     iconeValor.className = "fa-solid fa-arrow-down";
   }
 
-  valor.append(iconeValor, ` ${formatarMoeda(mov.valor)}`);
 
-  valor.addEventListener("click", () => {
-    const input = document.createElement("input");
+valor.append(iconeValor, ` ${formatarMoeda(mov.valor)}`);
 
-    input.type = "text";
+valor.addEventListener("click", () => {
+  const input = document.createElement("input");
+  const valorOriginal = mov.valor;
 
-    input.value = mov.valor;
-    input.pattern = "^\d+(\.\d+)?$";
-    input.required = true;
+  input.type = "text";
+  input.value = String(mov.valor).replace(".", ",");
+  input.pattern = "^\\d+(,\\d+)?$";
+  input.required = true;
 
-    input.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        const novoValor = parseFloat(input.value);
+  function guardarValor() {
+    const novoValor = parseFloat(input.value.replace(",", "."));
 
-        if (!isNaN(novoValor) && novoValor > 0) {
-          mov.valor = novoValor;
-          aoEditar();
-        }
-        else
-        {
+    if (!isNaN(novoValor) && novoValor > 0) {
+      mov.valor = novoValor;
+    } else {
+      mov.valor = valorOriginal;
+    }
 
+    aoEditar();
+  }
 
-        }
-      }
-    });
-      input.addEventListener("blur", () => {
-        const novoValor = parseFloat(input.value);
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      guardarValor();
+    }
 
-        if (!isNaN(novoValor) && novoValor > 0) {
-          mov.valor = novoValor;
-          aoEditar();
-        }
-        else
-        {
-
-
-        }
-
-    });
-
-    valor.replaceWith(input);
-    input.focus();
+    if (event.key === "Escape") {
+      mov.valor = valorOriginal;
+      aoEditar();
+    }
   });
+
+  input.addEventListener("blur", guardarValor);
+
+  valor.replaceWith(input);
+  input.focus();
+});
 
   const button = document.createElement("button");
   button.className = "apagar";
@@ -94,7 +90,7 @@ export function criarLinha(mov, aoApagar,aoEditar) {
   return li;
 }
 
-export function renderLista(container, movimentos, aoApagar,aoEditar) {
+export function renderLista(container, movimentos, aoApagar, aoEditar) {
 
   if (movimentos.length === 0) {
 
@@ -107,7 +103,7 @@ export function renderLista(container, movimentos, aoApagar,aoEditar) {
 
 
   }
-  container.replaceChildren(...movimentos.map((mov) => criarLinha(mov, aoApagar,aoEditar)));
+  container.replaceChildren(...movimentos.map((mov) => criarLinha(mov, aoApagar, aoEditar)));
 }
 
 export function renderResumo(totais) {
