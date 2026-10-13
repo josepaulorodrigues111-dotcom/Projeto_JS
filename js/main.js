@@ -1,10 +1,6 @@
 
 import { carregarDados } from "./api.js";
-import {
-  renderLista,
-  renderResumo,
-  renderDespesasCategoria,
-} from "./render.js";
+import {renderLista, renderResumo, renderDespesasCategoria} from "./render.js";
 import { calcularTotais } from "./calculos.js";
 import { validarForm } from "./validacoes.js";
 import { aplicarFiltros } from "./filtros.js";
@@ -141,13 +137,13 @@ form.addEventListener("submit", (event) => {
   form.reset();
 });
 
-// Eventos dos filtros
+
 pesquisaEl.addEventListener("input", atualizar);
 filtroTipoEl.addEventListener("change", atualizar);
 filtroCategoriaEl.addEventListener("change", atualizar);
 filtroOrdemEl.addEventListener("change", atualizar);
 
-// Eventos do modal
+
 modalConfirmar.addEventListener("click", confirmarApagar);
 
 modalCancelar.addEventListener("click", () => {
@@ -155,7 +151,7 @@ modalCancelar.addEventListener("click", () => {
   modal.close();
 });
 
-// Restaurar filtros guardados
+
 const filtrosGuardados = sessao.ler("filtros");
 
 if (filtrosGuardados !== null) {
