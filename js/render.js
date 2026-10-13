@@ -1,12 +1,9 @@
+
 import { formatarData, formatarMoeda, obterIcone } from "./utils.js";
 
-
 export function criarLinha(mov, aoApagar, aoEditar) {
-
-
   const li = document.createElement("li");
   li.className = `movimento ${mov.tipo}`;
-
 
   const desc = document.createElement("span");
   desc.className = "desc";
@@ -35,55 +32,76 @@ export function criarLinha(mov, aoApagar, aoEditar) {
     iconeValor.className = "fa-solid fa-arrow-down";
   }
 
+  valor.append(iconeValor, ` ${formatarMoeda(mov.valor)}`);
 
-valor.append(iconeValor, ` ${formatarMoeda(mov.valor)}`);
+  valor.addEventListener("click", () => {
+    const input = document.createElement("input");
 
-valor.addEventListener("click", () => {
-  const input = document.createElement("input");
-  const valorOriginal = mov.valor;
+    input.type = "text";
+    input.value = String(mov.valor).replace(".", ",");
+    input.pattern = "^\\d+(,\\d+)?$";
+    input.required = true;
+    input.setAttribute("aria-label", "Novo valor do movimento");
 
-  input.type = "text";
-  input.value = String(mov.valor).replace(".", ",");
-  input.pattern = "^\\d+(,\\d+)?$";
-  input.required = true;
+    let terminado = false;
 
-  function guardarValor() {
-    const novoValor = parseFloat(input.value.replace(",", "."));
+    function cancelarEdicao() {
+      if (terminado) return;
 
-    if (!isNaN(novoValor) && novoValor > 0) {
-      mov.valor = novoValor;
-    } else {
-      mov.valor = valorOriginal;
+      terminado = true;
+      aoEditar(mov.id, {});
     }
 
-    aoEditar();
-  }
+    function guardarValor() {
+      if (terminado) return;
 
-  input.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      guardarValor();
+      terminado = true;
+
+      const texto = input.value.trim();
+      const novoValor = parseFloat(texto.replace(",", "."));
+
+      const valorValido =
+        texto !== "" &&
+        /^\d+(,\d+)?$/.test(texto) &&
+        Number.isFinite(novoValor) &&
+        novoValor > 0;
+
+      if (valorValido) {
+        aoEditar(mov.id, { valor: novoValor });
+      } else {
+        aoEditar(mov.id, {});
+      }
     }
 
-    if (event.key === "Escape") {
-      mov.valor = valorOriginal;
-      aoEditar();
-    }
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        guardarValor();
+      }
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        cancelarEdicao();
+      }
+    });
+
+    input.addEventListener("blur", guardarValor);
+
+    valor.replaceWith(input);
+    input.focus();
+    input.select();
   });
-
-  input.addEventListener("blur", guardarValor);
-
-  valor.replaceWith(input);
-  input.focus();
-});
 
   const button = document.createElement("button");
   button.className = "apagar";
+
   const iconeApagar = document.createElement("i");
   iconeApagar.className = "fa-solid fa-trash";
+
   button.append(iconeApagar);
   button.title = "Apagar movimento";
   button.setAttribute("aria-label", "Apagar movimento");
-  button.addEventListener("click", () => aoApagar(mov.id))
+  button.addEventListener("click", () => aoApagar(mov.id));
 
   li.append(desc, categoria, data, valor, button);
 
@@ -91,23 +109,23 @@ valor.addEventListener("click", () => {
 }
 
 export function renderLista(container, movimentos, aoApagar, aoEditar) {
-
   if (movimentos.length === 0) {
-
     const vazio = document.createElement("li");
     vazio.className = "vazio";
     vazio.textContent = "Sem movimentos a mostrar";
 
     container.replaceChildren(vazio);
     return;
-
-
   }
-  container.replaceChildren(...movimentos.map((mov) => criarLinha(mov, aoApagar, aoEditar)));
+
+  container.replaceChildren(
+    ...movimentos.map((mov) =>
+      criarLinha(mov, aoApagar, aoEditar)
+    )
+  );
 }
 
 export function renderResumo(totais) {
-
   const saldo = document.getElementById("saldo");
   const receitas = document.getElementById("receitas");
   const despesas = document.getElementById("despesas");
@@ -115,31 +133,39 @@ export function renderResumo(totais) {
   saldo.textContent = formatarMoeda(totais.saldo);
   receitas.textContent = formatarMoeda(totais.receitas);
   despesas.textContent = formatarMoeda(totais.despesas);
-
-
 }
 
 export function renderDespesasCategoria(movimentos) {
   const container = document.getElementById("lista-categorias");
 
-  const despesas = movimentos.filter((mov) => mov.tipo === "despesa");
+  const despesas = movimentos.filter(
+    (mov) => mov.tipo === "despesa"
+  );
 
   const totais = despesas.reduce((acc, mov) => {
-    acc[mov.categoria] = (acc[mov.categoria] ?? 0) + mov.valor;
+    acc[mov.categoria] =
+      (acc[mov.categoria] ?? 0) + mov.valor;
+
     return acc;
   }, {});
 
-  const ordenadas = Object.entries(totais).sort((a, b) => b[1] - a[1]);
+  const ordenadas = Object.entries(totais).sort(
+    (a, b) => b[1] - a[1]
+  );
 
   if (ordenadas.length === 0) {
     const vazio = document.createElement("li");
     vazio.className = "vazio";
     vazio.textContent = "Sem despesas para mostrar";
+
     container.replaceChildren(vazio);
     return;
   }
 
-  const totalDespesas = ordenadas.reduce((soma, [, valor]) => soma + valor, 0);
+  const totalDespesas = ordenadas.reduce(
+    (soma, [, valor]) => soma + valor,
+    0
+  );
 
   const linhas = ordenadas.map(([categoria, valor]) => {
     const percentagem = (valor / totalDespesas) * 100;
@@ -158,7 +184,8 @@ export function renderDespesasCategoria(movimentos) {
     nome.append(iconeNome, ` ${categoria}`);
 
     const valorEl = document.createElement("span");
-    valorEl.textContent = `${formatarMoeda(valor)} (${Math.round(percentagem)}%)`;
+    valorEl.textContent =
+      `${formatarMoeda(valor)} (${Math.round(percentagem)}%)`;
 
     info.append(nome, valorEl);
 
@@ -171,6 +198,7 @@ export function renderDespesasCategoria(movimentos) {
 
     barra.append(preenchida);
     li.append(info, barra);
+
     return li;
   });
 
