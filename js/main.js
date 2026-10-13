@@ -1,9 +1,5 @@
 import { carregarDados } from "./api.js";
-import {
-  renderLista,
-  renderResumo,
-  renderDespesasCategoria
-} from "./render.js";
+import { renderLista, renderResumo, renderDespesasCategoria } from "./render.js";
 import { calcularTotais } from "./calculos.js";
 import { validarForm } from "./validacoes.js";
 import { aplicarFiltros } from "./filtros.js";
@@ -157,5 +153,4 @@ if (filtrosGuardados !== null) {
   filtroOrdemEl.value = filtrosGuardados.ordem ?? "recentes";
 }
 
-// Renderização inicial
 atualizar();

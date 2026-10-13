@@ -503,9 +503,7 @@ footer a:hover {
     display: none;
   }
 
-  /* Cada movimento em 2 linhas:
-     linha 1: descrição | valor | apagar
-     linha 2: categoria | data  | apagar */
+  
   .movimento {
     grid-template-columns: minmax(0, 1fr) auto auto;
     grid-template-rows: auto auto;

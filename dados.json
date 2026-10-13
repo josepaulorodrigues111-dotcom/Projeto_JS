@@ -11,7 +11,7 @@
   { "id": 10, "descricao": "Freelance design web",     "valor": 320.00,  "tipo": "receita", "categoria": "Trabalho",    "data": "2026-08-14", "timestamp": 1786717800000 },
   { "id": 11, "descricao": "Jantar de aniversário",    "valor": 64.00,   "tipo": "despesa", "categoria": "Lazer",       "data": "2026-08-16", "timestamp": 1786914300000 },
   { "id": 12, "descricao": "Passe Navegante",          "valor": 40.00,   "tipo": "despesa", "categoria": "Transportes", "data": "2026-08-20", "timestamp": 1787210700000 },
-  { "id": 13, "descricao": "Consulta dentista",        "valor": 50.00, "tipo": "despesa", "categoria": "Saúde",       "data": "2026-08-25", "timestamp": 1787662800000 },
+  { "id": 13, "descricao": "Consulta dentista",        "valor": 50.00,   "tipo": "despesa", "categoria": "Saúde",       "data": "2026-08-25", "timestamp": 1787662800000 },
   { "id": 14, "descricao": "Salário",                  "valor": 1450.00, "tipo": "receita", "categoria": "Trabalho",    "data": "2026-09-01", "timestamp": 1788249600000 },
   { "id": 15, "descricao": "Renda do apartamento",     "valor": 550.00,  "tipo": "despesa", "categoria": "Habitação",   "data": "2026-09-02", "timestamp": 1788340500000 },
   { "id": 16, "descricao": "Supermercado Continente",  "valor": 94.30,   "tipo": "despesa", "categoria": "Alimentação", "data": "2026-09-05", "timestamp": 1788604800000 },
