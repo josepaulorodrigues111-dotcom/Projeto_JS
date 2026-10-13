@@ -85,41 +85,47 @@
                 <h2>Movimentos</h2>
 
                 <div id="filtros">
+    <div class="campos-filtros">
 
-                    <div class="nomes-filtros">
-                        <span>Tipo</span>
-                        <span>Categoria</span>
-                        <span>Ordenar por</span>
-                    </div>
+        <div class="campo campo-pesquisa">
+            <label for="pesquisa">Pesquisar</label>
+            <input type="search" id="pesquisa" placeholder="Pesquisar...">
+        </div>
 
-                    <div class="campos-filtros">
-                        <input type="search" id="pesquisa" placeholder="Pesquisar...">
+        <div class="campo">
+            <label for="filtro-tipo">Tipo</label>
+            <select id="filtro-tipo">
+                <option value="todos">Todos</option>
+                <option value="receita">Receitas</option>
+                <option value="despesa">Despesas</option>
+            </select>
+        </div>
 
-                        <select id="filtro-tipo">
-                            <option value="todos">Todos</option>
-                            <option value="receita">Receitas</option>
-                            <option value="despesa">Despesas</option>
-                        </select>
+        <div class="campo">
+            <label for="filtro-categoria">Categoria</label>
+            <select id="filtro-categoria">
+                <option value="">Todas</option>
+                <option value="Alimentação">Alimentação</option>
+                <option value="Habitação">Habitação</option>
+                <option value="Transportes">Transportes</option>
+                <option value="Lazer">Lazer</option>
+                <option value="Saúde">Saúde</option>
+                <option value="Trabalho">Trabalho</option>
+                <option value="Outros">Outros</option>
+            </select>
+        </div>
 
-                        <select id="filtro-categoria">
-                            <option value="">Todas</option>
-                            <option value="Alimentação">Alimentação</option>
-                            <option value="Habitação">Habitação</option>
-                            <option value="Transportes">Transportes</option>
-                            <option value="Lazer">Lazer</option>
-                            <option value="Saúde">Saúde</option>
-                            <option value="Trabalho">Trabalho</option>
-                            <option value="Outros">Outros</option>
-                        </select>
+        <div class="campo">
+            <label for="filtro-ordem">Ordenar por</label>
+            <select id="filtro-ordem">
+                <option value="recentes">Mais recentes</option>
+                <option value="antigos">Mais antigos</option>
+                <option value="valor">Maior valor</option>
+            </select>
+        </div>
 
-                        <select id="filtro-ordem">
-                            <option value="recentes">Mais recentes</option>
-                            <option value="antigos">Mais antigos</option>
-                            <option value="valor">Maior valor</option>
-                        </select>
-                    </div>
-
-                </div>
+    </div>
+</div>
 
                 <div class="cabecalho-movimentos">
                     <span>Descrição</span>

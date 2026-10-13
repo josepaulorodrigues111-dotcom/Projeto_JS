@@ -1,5 +1,3 @@
-
-
 export function validarForm(movimento) {
 
     if (movimento.descricao.trim() === "") {
