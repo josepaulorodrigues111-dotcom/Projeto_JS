@@ -272,7 +272,7 @@ select:focus {
 /* Lista de movimentos */
 #lista-movimentos {
   list-style: none;
-  max-height: 380px;
+  height: 380px;
   overflow-y: auto;
   padding-right: 4px;
 }
@@ -549,7 +549,7 @@ footer a:hover {
   }
 
   #lista-movimentos {
-    max-height: 420px;
+    height: 420px;
   }
 }
 
